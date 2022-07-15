@@ -3,7 +3,8 @@ const fs = require( 'fs' );
 const path = require( 'path' );
 const React = require( 'react' );
 const ReactDOMServer = require( 'react-dom/server' );
-const { StaticRouter, matchPath } = require( 'react-router-dom' );
+const { matchPath } = require( 'react-router-dom' );
+import { StaticRouter } from "react-router-dom/server";
 
 // create express application
 const app = express();
@@ -21,7 +22,7 @@ app.get( /\.(js|css|map|ico)$/, express.static( path.resolve( __dirname, '../dis
 app.use( '*', async ( req, res ) => {
 
     // get matched route
-    const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
+    const matchRoute = routes.find( route => matchPath( route, req.originalUrl ) );
 
     // fetch data of the matched component
     let componentData = null;

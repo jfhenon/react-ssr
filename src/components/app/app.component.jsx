@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink as Link, Switch, Route } from 'react-router-dom';
+import { NavLink as Link, Routes, Route } from 'react-router-dom';
 
 // import child components
 import { Counter } from '../counter';
@@ -21,33 +21,31 @@ export class App extends React.Component {
                 {/* navigation */}
                 <div className='ui-app__navigation'>
                     <Link
-                        className='ui-app__navigation__link'
-                        activeClassName='ui-app__navigation__link--active'
+                        className={({ isActive }) => "nav-ui-app__navigation__link" + (isActive ? " ui-app__navigation__link--active" : "")}
                         to='/'
-                        exact={ true }
+                        end
                     >Counter</Link>
 
                     <Link
-                        className='ui-app__navigation__link'
-                        activeClassName='ui-app__navigation__link--active'
+                        className={({ isActive }) => "ui-app__navigation__link" + (isActive ? " ui-app__navigation__link--active" : "")}
                         to='/post'
-                        exact={ true }
+                        end
                     >Post</Link>
                 </div>
 
-                <Switch>
+                <Routes>
                     <Route
                         path='/'
-                        exact={ true }
-                        render={ () => <Counter name='Monica Geller'/> }
+                        exact
+                        element={ <Counter name='Monica Geller'/> }
                     />
 
                     <Route
                         path='/post'
                         exact={ true }
-                        component={ Post }
+                        element={ <Post /> }
                     />
-                </Switch>
+                </Routes>
                 
             </div>
         );
